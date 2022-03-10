@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Group of methods concerning Category interface
  */
-public class CategoryClass {
+public class CategoryClass{
 
     /**
      * insert new category type to database
