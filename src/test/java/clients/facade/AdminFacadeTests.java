@@ -94,7 +94,7 @@ public class AdminFacadeTests {
             companiesDBDAO.updateCompany(company);
         } catch (CustomExceptions customExceptions) {
             System.out.println(customExceptions.getMessage());
-        }
+         }
     }
 
     @Test(expected = CustomExceptions.class)
