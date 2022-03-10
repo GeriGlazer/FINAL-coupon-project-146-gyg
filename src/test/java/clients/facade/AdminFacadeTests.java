@@ -73,18 +73,18 @@ public class AdminFacadeTests {
     @Test
     public void addedCompanyPass() {
         assertTrue(companiesDBDAO.isCompanyExists("sam@sung.com", "s2m5un6"));
-        assertTrue(companiesDBDAO.isCompanyExistsById(7));
+        assertTrue(companiesDBDAO.isCompanyExistsById(1));
         assertTrue(companiesDBDAO.isCompanyExistsByEmail("sam@sung.com"));
         assertTrue(companiesDBDAO.isCompanyExistsByName("samsung"));
     }
 
-    @Test(expected = CustomExceptions.class)
+    @Test
     public void addedCompanyFail() {
-        assertTrue(companiesDBDAO.isCompanyExists("sam@sam.com", "s2m5un6"));
-        assertTrue(companiesDBDAO.isCompanyExists("sam@sung.com", "s11116"));
-        assertTrue(companiesDBDAO.isCompanyExistsById(10));
-        assertTrue(companiesDBDAO.isCompanyExistsByEmail("som@sung.com"));
-        assertTrue(companiesDBDAO.isCompanyExistsByName("sammsung"));
+        assertFalse(companiesDBDAO.isCompanyExists("sam@sam.com", "s2m5un6"));
+        assertFalse(companiesDBDAO.isCompanyExists("sam@sung.com", "s11116"));
+        assertFalse(companiesDBDAO.isCompanyExistsById(10));
+        assertFalse(companiesDBDAO.isCompanyExistsByEmail("som@sung.com"));
+        assertFalse(companiesDBDAO.isCompanyExistsByName("sammsung"));
     }
 
     @Test
@@ -167,11 +167,11 @@ public class AdminFacadeTests {
         assertTrue(customersDBDAO.isCustomerExistsById("dana@serco.com"));
     }
 
-    @Test(expected = CustomExceptions.class)
+    @Test
     public void addedCustomerFail() {
-        assertTrue(customersDBDAO.isCustomerExist("oren@serco.com", "54321"));
-        assertTrue(customersDBDAO.isCustomerExist("dana@serco.com", "52341"));
-        assertTrue(customersDBDAO.isCustomerExistsById("dana@serc.com"));
+        assertFalse(customersDBDAO.isCustomerExist("oren@serco.com", "54321"));
+        assertFalse(customersDBDAO.isCustomerExist("dana@serco.com", "52341"));
+        assertFalse(customersDBDAO.isCustomerExistsById("dana@serc.com"));
     }
 
     @Test

@@ -28,16 +28,21 @@ public class CompanyFacadeTests {
         System.out.println("Starting tests for company facade");
         couponsDBDAO = new CouponsDBDAO();
         companyFacade = new CompanyFacade();
-        coupon = new Coupon(1, 8, Category.ELECTRICITY, "bibi's coupon'S", "dont know",
+        coupon = new Coupon(1, 1, Category.ELECTRICITY, "bibi's coupon'S", "dont know",
                 new Date(System.currentTimeMillis()),
                 new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000), 150, 25, "image");
         loginManager = LoginManager.getInstance();
+        try {
+            companyFacade = (CompanyFacade) loginManager.login("sam@sung.com", "s2m5un6", ClientType.COMPANY);
+        } catch (CustomExceptions e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void loginPass() {
         try {
-            Assert.assertTrue(loginManager.login("shachar@yaks.com", "pjj123", ClientType.COMPANY)instanceof CompanyFacade);
+            Assert.assertTrue(loginManager.login("sam@sung.com", "s2m5un6", ClientType.COMPANY)instanceof CompanyFacade);
         } catch (CustomExceptions customExceptions) {
             System.out.println(customExceptions.getMessage());
         }
@@ -54,6 +59,7 @@ public class CompanyFacadeTests {
 
     @Test
     public void addCoupon() {
+        System.out.println(companyFacade.getCompanyId());
         try {
             companyFacade.addCoupon(coupon);
         } catch (CustomExceptions customExceptions) {

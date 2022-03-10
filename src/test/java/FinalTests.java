@@ -1,3 +1,5 @@
+import clients.db.DBManager;
+import clients.db.DBTools;
 import clients.facade.AdminFacadeTests;
 import clients.facade.CompanyFacadeTests;
 import clients.facade.CustomerFacadeTests;
@@ -20,6 +22,23 @@ public class FinalTests {
         System.out.println("Starting all tests");
     }
 
+    @Test
+    public void cleanDataBase(){
+        DBTools.runQuery(DBManager.DROP_CUSTOMER_VS_COUPONS_TABLE);
+        DBTools.runQuery(DBManager.DROP_COUPONS_TABLE);
+        DBTools.runQuery(DBManager.DROP_COMPANY_TABLE);
+        DBTools.runQuery(DBManager.DROP_CUSTOMERS_TABLE);
+
+        DBTools.runQuery(DBManager.CREATE_COMPANY_TABLE);
+        DBTools.runQuery(DBManager.CREATE_CUSTOMER_TABLE);
+        DBTools.runQuery(DBManager.CREATE_COUPONS_TABLE);
+        DBTools.runQuery(DBManager.CREATE_CUSTOMER_VS_COUPONS_TABLE);
+    }
+
+    @Test
+    public void adminFacadeTest(){
+        new TestSuite(AdminFacadeTests.class);
+    }
 
     @Test
     public void customerFacadeTests(){
@@ -29,10 +48,5 @@ public class FinalTests {
     @Test
     public void companyFacadeTests(){
         new TestSuite(CompanyFacadeTests.class);
-    }
-
-    @Test
-    public void adminFacadeTest(){
-        new TestSuite(AdminFacadeTests.class);
     }
 }

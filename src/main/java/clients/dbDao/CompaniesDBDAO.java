@@ -72,7 +72,7 @@ public class CompaniesDBDAO implements CompaniesDAO {
         Map<Integer, Object> values = new HashMap<>();
         try {
             values.put(1, email);
-            ResultSet resultSet = DBTools.runQueryForResult(DBManager.COUNT_COMPANY_BY_NAME, values);
+            ResultSet resultSet = DBTools.runQueryForResult(DBManager.COUNT_COMPANY_BY_EMAIL, values);
             assert resultSet != null;
             resultSet.next();
             return (resultSet.getInt(1) == 1);
