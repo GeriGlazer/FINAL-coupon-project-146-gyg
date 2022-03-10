@@ -43,7 +43,7 @@ public class CategoryClass {
         Map<Integer, Object> values = new HashMap<>();
         values.put(1, categoryId);
         if(getCategoryName(categoryId).isEmpty()){
-            throw new CustomExceptions(EnumExceptions.CATEGORY_NOT_EXIST);
+            throw new CustomExceptions(EnumExceptions.CATEGORY_NOT_EXIST) ;
         }
         DBTools.runQuery(DBManager.DELETE_CATEGORY, values);
     }
