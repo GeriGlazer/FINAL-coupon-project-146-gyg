@@ -65,9 +65,11 @@ public class System {
         system = System.getInstance();
         loginManager = LoginManager.getInstance();
         //check login for all 3 clients type
+        adminFacade = (AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR);
+        adminFacade.addCompany(company);
+        adminFacade.addCustomer(customer);
         customerFacade = (CustomerFacade) loginManager.login(customer.getEmail(), customer.getPassword(), ClientType.CUSTOMER);
         companyFacade = (CompanyFacade) loginManager.login(company.getEmail(), company.getPassword(), ClientType.COMPANY);
-        adminFacade = (AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR);
 
         //compile all facade tests (GO TO test->java->FinalTests class)
 

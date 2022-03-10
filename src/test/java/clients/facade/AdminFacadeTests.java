@@ -54,11 +54,7 @@ public class AdminFacadeTests {
 
     @Test(expected = CustomExceptions.class)
     public void loginFail() throws CustomExceptions {
-        try {
             Assert.assertTrue((loginManager.login("gery@gmail.com", "14521", ClientType.ADMINISTRATOR) instanceof AdminFacade));
-        } catch (CustomExceptions customExceptions) {
-            System.out.println(customExceptions.getMessage());
-        }
     }
 
     @Test
@@ -215,7 +211,7 @@ public class AdminFacadeTests {
 
     @Test
     public void getOneCustomerPass() {
-        customersDBDAO.getOneCustomer(4);
+        System.out.println(customersDBDAO.getOneCustomer(1));
     }
 
     @Test(expected = CustomExceptions.class)
