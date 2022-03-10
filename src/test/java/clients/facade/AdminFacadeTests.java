@@ -98,13 +98,9 @@ public class AdminFacadeTests {
     }
 
     @Test(expected = CustomExceptions.class)
-    public void updateCompanyFail() {
-        try {
+    public void updateCompanyFail() throws CustomExceptions {
             company.setId(20);
             companiesDBDAO.updateCompany(company);
-        } catch (CustomExceptions customExceptions) {
-            System.out.println(customExceptions.getMessage());
-        }
     }
 
     @Test
