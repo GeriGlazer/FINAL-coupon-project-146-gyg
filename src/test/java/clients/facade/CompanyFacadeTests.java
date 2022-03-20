@@ -33,7 +33,7 @@ public class CompanyFacadeTests {
                 new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000), 150, 25, "image");
         loginManager = LoginManager.getInstance();
         try {
-            companyFacade = (CompanyFacade) loginManager.login("sam@sung.com", "s2m5un6", ClientType.COMPANY);
+            companyFacade = (CompanyFacade) loginManager.login("shachar@yaks.com", "pjj123", ClientType.COMPANY);
         } catch (CustomExceptions e) {
             e.printStackTrace();
         }
