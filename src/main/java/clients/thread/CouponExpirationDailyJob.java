@@ -30,7 +30,8 @@ public class CouponExpirationDailyJob implements Runnable {
                         myCoupons.deleteCoupon(item.getId());
                     }
                 }
-                Thread.sleep(1000 * 60 * 60 * 24);
+                //Thread.sleep(1000 * 60 * 60 * 24);
+                Thread.sleep(1000*60);
             } catch (InterruptedException | CustomExceptions e) {
                 System.out.println(e.getMessage());
             }

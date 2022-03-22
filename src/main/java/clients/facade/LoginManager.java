@@ -55,11 +55,13 @@ public class LoginManager {
     public ClientFacade login(String email, String password, ClientType clientType) throws CustomExceptions {
         switch (clientType) {
             case ADMINISTRATOR:
-                if (adminFacade.login(email, password)) {
-                    System.out.println("admin connected");
-                    return adminFacade;
-                } else {
-                    throw new CustomExceptions(EnumExceptions.NOT_ADMIN);
+                try {
+                    if (adminFacade.login(email, password)) {
+                        System.out.println("admin connected");
+                        return adminFacade;
+                    }
+                }catch (CustomExceptions customExceptions){
+                    System.out.println(customExceptions.getMessage());
                 }
             case COMPANY:
                 if (companyFacade.login(email, password)) {

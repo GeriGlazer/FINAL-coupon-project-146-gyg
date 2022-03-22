@@ -9,4 +9,7 @@ public class CustomExceptions extends Exception{
         super(enumExceptions.getMessage());
     }
 
+    public CustomExceptions(String message) {
+        super(message);
+    }
 }

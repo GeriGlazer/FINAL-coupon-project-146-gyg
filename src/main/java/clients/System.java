@@ -33,7 +33,7 @@ public class System {
     private static CompanyFacade companyFacade;
     private static AdminFacade adminFacade;
     private static Company company = new Company(1, "Shachar", "shachar@yaks.com", "pjj123", new ArrayList<>());
-    private static Customer customer = new Customer(1, "Dana", "Sercovich", "dana@serco.com", "54321", new ArrayList<>());
+    private static Customer customer = new Customer(1, "Dan", "Servich", "dan@ser.com", "54321", new ArrayList<>());
     private static List<Category> categories;
 
     /**
@@ -101,6 +101,7 @@ public class System {
      * create databases for beginning
      */
     public static void createDataBases(){
+        DBTools.runQuery(DBManager.CREATED_DB);
         DBTools.runQuery(DBManager.CREATE_CATEGORIES_TABLE);
         DBTools.runQuery(DBManager.CREATE_COMPANY_TABLE);
         DBTools.runQuery(DBManager.CREATE_CUSTOMER_TABLE);

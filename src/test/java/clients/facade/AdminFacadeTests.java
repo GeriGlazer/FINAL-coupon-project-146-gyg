@@ -43,7 +43,7 @@ public class AdminFacadeTests {
         adminFacade = new AdminFacade();
         loginManager = LoginManager.getInstance();
         try {
-            adminFacade=(AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR );
+            adminFacade = (AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR);
         } catch (CustomExceptions customExceptions) {
             System.out.println(customExceptions.getMessage());
         }
@@ -60,7 +60,7 @@ public class AdminFacadeTests {
 
     @Test(expected = CustomExceptions.class)
     public void loginFail() throws CustomExceptions {
-        Assert.assertTrue((loginManager.login("gery@gmail.com", "14521", ClientType.ADMINISTRATOR) instanceof AdminFacade));
+        loginManager.login("gery@gmail.com", "14521", ClientType.ADMINISTRATOR);
     }
 
     @Test
@@ -147,13 +147,9 @@ public class AdminFacadeTests {
         }
     }
 
-    @Test
-    public void addCustomerFail() {
-        try {
-            adminFacade.addCustomer(customers[2]);
-        } catch (CustomExceptions customExceptions) {
-            System.out.println(customExceptions.getMessage());
-        }
+    @Test(expected = CustomExceptions.class)
+    public void addCustomerFail() throws CustomExceptions {
+        adminFacade.addCustomer(customers[2]);
     }
 
     @Test

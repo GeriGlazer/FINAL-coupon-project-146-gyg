@@ -2,7 +2,6 @@ package clients.facade;
 
 import clients.beans.Category;
 import clients.beans.Coupon;
-import clients.dbDao.CouponsDBDAO;
 import clients.exceptions.CustomExceptions;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -29,6 +28,7 @@ public class CompanyFacadeTests {
         coupon = new Coupon(1, 2, Category.ELECTRICITY, "bibi's coupon'S", "dont know",
                 new Date(System.currentTimeMillis()),
                 new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000), 150, 25, "image");
+
         loginManager = LoginManager.getInstance();
         try {
             companyFacade=(CompanyFacade)loginManager.login("sam@sung.com", "s2m5un6", ClientType.COMPANY );
@@ -54,6 +54,9 @@ public class CompanyFacadeTests {
     @Test
     public void addCoupon() {
         companyFacade.addCoupon(coupon);
+        companyFacade.addCoupon(new Coupon(0, 3, Category.PERSONAL_CARE, "soapy", "soap",
+                new Date(System.currentTimeMillis()),
+                new Date(System.currentTimeMillis() + 60 * 1000), 3, 15, "image"));
     }
 
     @Test

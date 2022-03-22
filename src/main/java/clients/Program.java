@@ -16,8 +16,12 @@ import static clients.System.*;
 public class Program {
 
     public static void main(String[] args) {
-        createDataBases();
+        //first time run, create schema and tables necessary to run the program
+        //createDataBases();
+        //Optional: to re-check the program
+
         cleanDataBase();
+
         try {
             testAll();
         } catch (CustomExceptions customExceptions) {
