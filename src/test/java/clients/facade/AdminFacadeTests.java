@@ -42,23 +42,15 @@ public class AdminFacadeTests {
     public static void init() {
         adminFacade = new AdminFacade();
         loginManager = LoginManager.getInstance();
-        try {
-            adminFacade = (AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR);
-        } catch (CustomExceptions customExceptions) {
-            System.out.println(customExceptions.getMessage());
-        }
+        adminFacade = (AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR);
     }
 
     @Test
     public void loginPass() {
-        try {
-            Assert.assertTrue((loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR) instanceof AdminFacade));
-        } catch (CustomExceptions customExceptions) {
-            System.out.println(customExceptions.getMessage());
-        }
+        Assert.assertTrue((loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR) instanceof AdminFacade));
     }
 
-    @Test(expected = CustomExceptions.class)
+    @Test
     public void loginFail() throws CustomExceptions {
         loginManager.login("gery@gmail.com", "14521", ClientType.ADMINISTRATOR);
     }
@@ -93,11 +85,15 @@ public class AdminFacadeTests {
         }
     }
 
-    @Test(expected = CustomExceptions.class)
-    public void updateCompanyFail() throws CustomExceptions {
-        companies[3].setId(20);
-        adminFacade.updateCompany(companies[3]);
+    @Test
+    public void setCompanyIdFail() {
+        try {
+            companies[3].setId(20);
+        } catch (CustomExceptions customExceptions) {
+            System.out.println(customExceptions.getMessage());
+        }
     }
+
 
     @Test
     public void deleteCompanyPass() throws CustomExceptions {
@@ -147,9 +143,13 @@ public class AdminFacadeTests {
         }
     }
 
-    @Test(expected = CustomExceptions.class)
-    public void addCustomerFail() throws CustomExceptions {
-        adminFacade.addCustomer(customers[2]);
+    @Test
+    public void addCustomerFail() {
+        try {
+            adminFacade.addCustomer(customers[2]);
+        } catch (CustomExceptions customExceptions) {
+            System.out.println(customExceptions.getMessage());
+        }
     }
 
     @Test
@@ -162,10 +162,13 @@ public class AdminFacadeTests {
         }
     }
 
-    @Test(expected = CustomExceptions.class)
-    public void updateCustomerFail() throws CustomExceptions {
-        customers[4].setId(15);
-        adminFacade.updateCustomer(customers[4]);
+    @Test
+    public void setCustomerIdFail() {
+        try {
+            customers[4].setId(15);
+        } catch (CustomExceptions customExceptions) {
+            System.out.println(customExceptions.getMessage());
+        }
     }
 
     @Test
@@ -202,6 +205,6 @@ public class AdminFacadeTests {
 
     @Test
     public void getOneCustomerFail() throws CustomExceptions {
-        System.out.println(adminFacade.getOneCustomer(2));
+        System.out.println(adminFacade.getOneCustomer(4));
     }
 }

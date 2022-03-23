@@ -5,7 +5,6 @@ import clients.beans.Company;
 import clients.beans.Coupon;
 import clients.db.DBManager;
 import clients.db.DBTools;
-import clients.dbDao.CompaniesDBDAO;
 import clients.exceptions.CustomExceptions;
 import clients.exceptions.EnumExceptions;
 
@@ -45,7 +44,7 @@ public class CompanyFacade extends ClientFacade {
      * @return verification result
      */
     @Override
-    public boolean login(String email, String password) {
+    public boolean login(String email, String password) throws CustomExceptions {
         if (companiesDBDAO.isCompanyExists(email, password)) {
             Map<Integer, Object> values = new HashMap<>();
             values.put(1, email);
@@ -60,19 +59,23 @@ public class CompanyFacade extends ClientFacade {
             }
             this.companyId=id;
             return true;
+        } else{
+            throw new CustomExceptions(EnumExceptions.FAIL_2_CONNECT);
         }
-        return false;
     }
 
-    public void addCoupon(Coupon coupon) {
-        if (coupon.getCompanyId() == companyId) {
+    public void addCoupon(Coupon coupon) throws CustomExceptions {
+
+        if (coupon.getCompanyId() != companyId)
+        throw new CustomExceptions(EnumExceptions.INVALID_PERMITION);
+
             try {
                 couponsDBDAO.addCoupon(coupon);
+                System.out.println("coupon added successfully");
             } catch (CustomExceptions customExceptions) {
                 System.out.println(customExceptions.getMessage());
             }
         }
-    }
 
     public void updateCoupon(Coupon coupon) throws CustomExceptions {
         if (coupon.getCompanyId() != companyId) {
@@ -80,6 +83,7 @@ public class CompanyFacade extends ClientFacade {
         } else {
             try {
                 couponsDBDAO.updateCoupon(coupon);
+                System.out.println("coupon updated successfully");
             } catch (CustomExceptions customExceptions) {
                 System.out.println(customExceptions.getMessage());
             }
@@ -94,7 +98,7 @@ public class CompanyFacade extends ClientFacade {
                 System.out.println(customExceptions.getMessage());
             }
         }else {
-            throw new CustomExceptions(EnumExceptions.NO_COUPONS);
+            throw new CustomExceptions(EnumExceptions.INVALID_PERMITION);
         }
     }
 

@@ -62,7 +62,7 @@ public class Coupon {
     }
 
     public void setId(int id) throws CustomExceptions {
-        throw new CustomExceptions("Can't change company/customer/coupon id");
+        throw new CustomExceptions(EnumExceptions.CAN_NOT_CHANGE_THIS_VARIABLE);
     }
 
     public int getCompanyId() {
@@ -70,7 +70,7 @@ public class Coupon {
     }
 
     public void setCompanyId(int companyId) throws CustomExceptions {
-        throw new CustomExceptions("Can't change company/customer/coupon id");
+        throw new CustomExceptions(EnumExceptions.CAN_NOT_CHANGE_THIS_VARIABLE);
     }
 
     public Category getCategory() {

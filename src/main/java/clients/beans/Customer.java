@@ -50,7 +50,7 @@ public class Customer {
     }
 
     public void setId(int id) throws CustomExceptions {
-        throw new CustomExceptions("Can't change company/customer/coupon id");
+        throw new CustomExceptions(EnumExceptions.CAN_NOT_CHANGE_THIS_VARIABLE);
     }
 
     public String getFirstName() {

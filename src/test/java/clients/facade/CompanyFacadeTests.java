@@ -2,6 +2,7 @@ package clients.facade;
 
 import clients.beans.Category;
 import clients.beans.Coupon;
+import clients.dbDao.CouponsDBDAO;
 import clients.exceptions.CustomExceptions;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -18,56 +19,54 @@ import java.sql.Date;
  */
 public class CompanyFacadeTests {
     private static CompanyFacade companyFacade;
-    private static Coupon coupon;
+    private static Coupon[] coupons = new Coupon[2];
     private static LoginManager loginManager;
 
     @BeforeClass
     public static void init() {
         System.out.println("Starting tests for company facade");
         companyFacade = new CompanyFacade();
-        coupon = new Coupon(1, 2, Category.ELECTRICITY, "bibi's coupon'S", "dont know",
+
+        coupons[0] = new Coupon(1, 1, Category.ELECTRICITY, "bibi's coupon'S", "dont know",
                 new Date(System.currentTimeMillis()),
                 new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000), 150, 25, "image");
-
+        coupons[1] = new Coupon(2, 1, Category.OUTDOOR, "zeev's coupon'S", "know",
+                new Date(System.currentTimeMillis()),
+                new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000), 150, 50, "image");
         loginManager = LoginManager.getInstance();
-        try {
             companyFacade=(CompanyFacade)loginManager.login("sam@sung.com", "s2m5un6", ClientType.COMPANY );
-        } catch (CustomExceptions customExceptions) {
-            System.out.println(customExceptions.getMessage());
-        }
     }
 
     @Test
     public void loginPass() {
-        try {
             Assert.assertTrue(loginManager.login("sam@sung.com", "s2m5un6", ClientType.COMPANY)instanceof CompanyFacade);
-        } catch (CustomExceptions customExceptions) {
-            System.out.println(customExceptions.getMessage());
-        }
     }
 
-    @Test(expected = CustomExceptions.class)
-    public void loginFail() throws CustomExceptions {
-            Assert.assertTrue(loginManager.login("shachar@yaks.com", "pjj123", ClientType.CUSTOMER)instanceof CompanyFacade);
+    @Test
+    public void loginFail() {
+            loginManager.login("shachar@yaks.com", "pjj123", ClientType.CUSTOMER);
     }
 
     @Test
     public void addCoupon() {
-        companyFacade.addCoupon(coupon);
-        companyFacade.addCoupon(new Coupon(0, 3, Category.PERSONAL_CARE, "soapy", "soap",
-                new Date(System.currentTimeMillis()),
-                new Date(System.currentTimeMillis() + 60 * 1000), 3, 15, "image"));
-    }
-
-    @Test
-    public void addCouponException(){
-        companyFacade.addCoupon(coupon);
-    }
-
-    @Test
-    public void setCoupon() {
         try {
-            companyFacade.updateCoupon(coupon);
+            companyFacade.addCoupon(coupons[0]);
+            companyFacade.addCoupon(coupons[1]);
+        } catch (CustomExceptions e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void addCouponException() throws CustomExceptions{
+        companyFacade.addCoupon(coupons[0]);
+    }
+
+    @Test
+    public void updateCoupon() {
+        try {
+            coupons[0].setCategory(Category.ENTERTAINMENT);
+            companyFacade.updateCoupon(coupons[0]);
         } catch (CustomExceptions customExceptions) {
             System.out.println(customExceptions.getMessage());
         }
@@ -89,7 +88,7 @@ public class CompanyFacadeTests {
 
     @Test
     public void getCompanyCouponsByCategory() {
-        System.out.println(companyFacade.getCompanyCoupons(Category.FOOD));
+        System.out.println(companyFacade.getCompanyCoupons(Category.OUTDOOR));
     }
 
     @Test

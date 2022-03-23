@@ -45,7 +45,7 @@ public class CustomerFacade extends ClientFacade {
      * @return verification result
      */
     @Override
-    public boolean login(String email, String password) {
+    public boolean login(String email, String password) throws CustomExceptions {
         if (customersDBDAO.isCustomerExist(email, password)) {
             Map<Integer, Object> values = new HashMap<>();
             values.put(1, email);
@@ -60,8 +60,9 @@ public class CustomerFacade extends ClientFacade {
             }
             this.customerID=id;
             return true;
+        } else{
+            throw new CustomExceptions(EnumExceptions.FAIL_2_CONNECT);
         }
-        return false;
     }
 
     public void purchaseCoupon(Coupon coupon) {

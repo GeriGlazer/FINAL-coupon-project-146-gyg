@@ -50,35 +50,36 @@ public class LoginManager {
      * @param password input by user
      * @param clientType input by user
      * @return facade
-     * @throws CustomExceptions if e-mail or password are not existent in database
      */
-    public ClientFacade login(String email, String password, ClientType clientType) throws CustomExceptions {
+    public ClientFacade login(String email, String password, ClientType clientType) {
         switch (clientType) {
             case ADMINISTRATOR:
-                try {
-                    if (adminFacade.login(email, password)) {
-                        System.out.println("admin connected");
-                        return adminFacade;
-                    }
-                }catch (CustomExceptions customExceptions){
+                try{
+                if (adminFacade.login(email, password)) {
+                    System.out.println("admin connected");
+                    return adminFacade;
+                }} catch(CustomExceptions customExceptions){
                     System.out.println(customExceptions.getMessage());
+                    return null;
                 }
             case COMPANY:
+                try{
                 if (companyFacade.login(email, password)) {
                     System.out.println("company number " + companyFacade.getCompanyId() + " is connected");
                     return companyFacade;
-                } else {
-                    throw new CustomExceptions(EnumExceptions.FAIL_2_CONNECT);
+                }} catch(CustomExceptions customExceptions) {
+                    System.out.println(customExceptions.getMessage());
+                    return null;
                 }
             case CUSTOMER:
-
+                try{
                 if (customerFacade.login(email, password)) {
                     System.out.println("customer number " + customerFacade.getCustomerID() + " is connected");
                     return customerFacade;
-                } else {
-                    throw new CustomExceptions(EnumExceptions.FAIL_2_CONNECT);
+                }}catch (CustomExceptions customExceptions){
+                    System.out.println(customExceptions.getMessage());
+                    return null;
                 }
-
             default:
                 System.out.println("wrong client type");
                 return null;

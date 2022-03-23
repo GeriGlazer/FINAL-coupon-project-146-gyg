@@ -15,6 +15,7 @@ public enum EnumExceptions {
     EMAIL_EXIST("Cannot add existing email."),
     ID_NOT_EXIST("ID not exist in database."),
     CAN_NOT_CHANGE_NAME("Can't change company/customer/coupon name"),
+    CAN_NOT_CHANGE_THIS_VARIABLE("Can't change company/customer/coupon id"),
     /**
      * coupons exceptions
      */
@@ -30,6 +31,7 @@ public enum EnumExceptions {
      */
     NO_COMPANY("No company with this ID in database."),
     COMPANY_DOES_NOT_HAVE_THIS_COUPON("Company doesn't have this coupon."),
+    INVALID_PERMITION("you are not allowed to do this"),
 
     /**
      * customer exceptions

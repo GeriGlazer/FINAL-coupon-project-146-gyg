@@ -155,11 +155,11 @@ public class CustomersDBDAO implements CustomersDAO {
         Map<Integer, Object> values = new HashMap<>();
         values.put(1, customerID);
         ResultSet resultSet = DBTools.runQueryForResult(DBManager.GET_ONE_CUSTOMER, values);
-        if (resultSet == null) {
-            throw new CustomExceptions(EnumExceptions.NO_CUSTOMER);
-        }
+
         try {
-            resultSet.next();
+            if(!resultSet.next()){
+                    throw new CustomExceptions(EnumExceptions.NO_CUSTOMER);
+            }
             customer = new Customer(
                     resultSet.getInt("id"),
                     resultSet.getString("first_name"),

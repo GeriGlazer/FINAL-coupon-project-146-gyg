@@ -33,12 +33,8 @@ public class CustomerTests {
     @Test
     public void customerLogin() {
         ClientType customerType = ClientType.CUSTOMER;
-        try {
-            ClientFacade customerFacade = loginManager.login("golans-email", "golans-password", customerType);
-            Assert.assertTrue(customerFacade instanceof CustomerFacade);
-        } catch (CustomExceptions customExceptions) {
-            System.out.println(customExceptions.getMessage());
-        }
+        ClientFacade customerFacade = loginManager.login("golans-email", "golans-password", customerType);
+        Assert.assertTrue(customerFacade instanceof CustomerFacade);
     }
 
     @Test
@@ -58,7 +54,7 @@ public class CustomerTests {
 
     @Test
     public void updateCustomer() {
-        customer=new Customer(1, "yoav", "hachmon", "yoavs-pemail", "yoavs-password", null);
+        customer = new Customer(1, "yoav", "hachmon", "yoavs-pemail", "yoavs-password", null);
         customer.setEmail("yoyo123-email");
         try {
             customersDBDAO.updateCustomer(customer);
@@ -77,7 +73,7 @@ public class CustomerTests {
     }
 
     @Test
-    public void getAllCustomers(){
+    public void getAllCustomers() {
         List<Customer> customerList = customersDBDAO.getAllCustomers();
         customerList.forEach(System.out::println);
     }
